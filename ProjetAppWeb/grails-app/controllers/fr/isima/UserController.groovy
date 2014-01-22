@@ -1,6 +1,7 @@
 package fr.isima
 
 import org.springframework.dao.DataIntegrityViolationException
+import org.springframework.web.servlet.LocaleResolver;
 
 class UserController {
 
@@ -26,11 +27,11 @@ class UserController {
 		*/
 		
 		if( userService.connect(params.Login,params.Password)){
-			flash.message = "login success"
+			flash.message = message(code:'message.login.success')
 			session.user = params.Login
 		}
 		else{
-			flash.message = "login failed"
+			flash.message = message(code:'message.login.failure')
 		}
 		redirect(uri:'/')
 	}
@@ -41,7 +42,11 @@ class UserController {
 		
 	}
 	
+	def changeLang(){
 	
+		
+		redirect(uri : "/" ,  params: [lang: params.lang ])
+	}
 	
     def index() {
         redirect(action: "list", params: params)

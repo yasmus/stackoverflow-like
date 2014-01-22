@@ -77,25 +77,38 @@
 				#page-body h1 {
 					margin-top: 0;
 				}
+				#langform{
+					float: right;
+				}
 			}
 		</style>
 	</head>
 	<body>
 		
+		<div align="right">
+			
+			<g:form  controller="user" action="changeLang">
+				<select id="lang" name="lang"> 
+				   <option value="en">${message(code:'message.english')}</option> 
+				   <option value="fr">${message(code:'message.french')}</option> 
+				</select> 
+				<input type="submit" value="ok">
+			</g:form>
+		</div>
 		
 		<div id="page-body" role="main">
 			<h1>Welcome to StackOverFlow</h1>
 
 			${flash.message }
 			<g:if test="${session.user}">
-				login as ${session.user } | <g:link controller="user" action="logout">logout</g:link>
+				${session.user } | <g:link controller="user" action="logout">logout</g:link>
 			</g:if>
 			<g:else>
 				<g:form controller="user" action="login">
 				<div>
 					<label>Email</label><input name="Login" type="text">
-					<label>Password</label><input name="Password" type="password">
-					<input type="submit" value="connect">
+					<label>${message(code:'message.login.password')}</label><input name="Password" type="password">
+					<input type="submit" value="${message(code:'message.login.connect')}">
 				</div>
 				</g:form>
 				<g:link controller="user" action="create">sign up</g:link>

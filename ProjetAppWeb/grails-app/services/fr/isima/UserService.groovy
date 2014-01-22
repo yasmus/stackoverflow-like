@@ -12,13 +12,19 @@ class UserService {
 
 	boolean connect(String email,String password){
 		User user = getUser(email, password);
-		println();
+		
 		if(user != null){
-			println("true");
-			return true
+			if(!user.email.equals(null) && user.email.length() != 0){
+			   
+				return true
+			}
+			else{
+				
+				return false
+			}
 		}
 		else{
-			println("false");
+			
 			return false
 		}
 	}
